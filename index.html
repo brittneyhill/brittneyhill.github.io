@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Girls Who Code's Favorite Cities</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<style>
+	h1 {
+		color: #680000 ;
+		text-align: center;
+		font: italic bold 50px Papyrus, fantasy, sans-serif;
+		position: static;
+		}
+  body { margin:0; padding:0; }
+  #container { position:relative; margin: 0px auto; width: 80%;}
+  #map { position:relative; height: 500px; width:100%; }
+  .popupimage { width: 200px; }
+</style>
+</head>
+<body>
+<style>
+#map {
+  pointer-events:all;
+  cursor:none
+  }
+#zoommap {
+  background:#73b5e5;
+  width:200px;
+  height:200px;
+  overflow:hidden;
+  -webkit-transform:rotate(-60deg);
+     -moz-transform:rotate(-60deg);
+      -ms-transform:rotate(-60deg);
+       -o-transform:rotate(-60deg);
+          transform:rotate(-60deg);
+  }
+#zoomlens {
+  overflow:visible;
+  top:-9999px;
+  left:-9999px;
+  }
+#border {
+  border:5px solid #66FFFF;
+  border-radius:50%;
+  box-shadow:0 0 10px rgba(0,0,0,0.25);
+  }
+.overlay {
+  position:absolute;
+  pointer-events:none;
+  overflow:hidden;
+  width:200px;
+  height:200px;
+  z-index:1000;
+  }
+.rotater {
+  -webkit-transform:rotate(30deg);
+     -moz-transform:rotate(30deg);
+      -ms-transform:rotate(30deg);
+       -o-transform:rotate(30deg);
+          transform:rotate(30deg);
+  }
+</style>
+<div id='map'></div>
+<div id='zoomlens' class='overlay'>
+    <div class='overlay rotater'>
+        <div class='overlay rotater'>
+            <div id='zoommap' class='overlay'></div>
+        </div>
+    </div>
+    <div id='border' class='overlay'></div>
+</div>
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiamVmZnN0ZXJuIiwiYSI6IlAzRFFiN0EifQ.mNWvayrLEw9wULuq0sopyA';
+var map = L.mapbox.map('map', 'mapbox.satellite');
+var zoommap = L.mapbox.map('zoommap', 'mapbox.dark', {
+    fadeAnimation: false,
+    zoomControl: false,
+    attributionControl: false
+});
+var myLayer = L.mapbox.featureLayer().addTo(map);
+var myLayer2 = L.mapbox.featureLayer().addTo(zoommap);
+//ballon marker data
+
+var geojson = {
+    type: 'FeatureCollection',
+
+
+    // This is an array of Map Point objects
+    features: [
+     {
+            type: 'Feature',
+            properties: {
+                title: 'Socotra, Yemen',
+                description: 'Alien world!!',
+                'marker-color': '#000000',
+                'marker-size': 'large',
+                'marker-symbol': 'marker',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [53.82, 12.46]
+            }
+        },
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Madagscar',
+                description: 'King Julian! <br /> <br /><img src="https://gabrielksmith.files.wordpress.com/2013/08/king-julien-whoareyou.jpg" class= "popupimage"/> ',
+                'marker-color': '#ee9e50',
+                'marker-size': 'large',
+                'marker-symbol': 'park2',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [46.869106999999985, -18.766947]
+            }
+        },
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Reykjavik, Iceland',
+                description: 'volcanoes',
+                'marker-color': '#99ccff',
+                'marker-size': 'large',
+                'marker-symbol': 'water',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [-21.933332999999948, 64.133333]
+            }
+        },
+
+        {
+         type: 'Feature',
+            properties: {
+                title: 'Athens, Greece',
+                description: 'Sisterhood of the traveler pants..??? :) <br /> <br /><img src="http://athenscypria.com/images/articles/1_g_79885.jpg" class="popupimage" /> ',
+                'marker-color': '#00FFFF',
+                'maker-size': 'large',
+                'marker-symbol': 'swimming',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [23.72936,  37.983917] 
+            }
+        },
+
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Mount Jiuhua, China',
+                description: 'mountains...',
+                'marker-color': '#99ccff',
+                'marker-size': 'large',
+                'marker-symbol': 'triangle',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [118.45870500000001, 31.670336]
+            }
+        },
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Machu Picchu, Peru',
+                description: 'Lets hike! <br /> <br /><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Machu_Picchu_early_morning.JPG" class="popupimage" />',
+                'marker-color': '#00CC00',
+                'marker-size': 'large',
+                'marker-symbol': 'pitch',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [-72.544963, -13.163141]
+            }
+        },
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Wineglass Bay, Tasmania, Australia',
+                description: 'the DOPEST aussie beach<br /> <br /><img src="http://www.enjoyourholiday.com/wp-content/uploads/2011/11/FLwineglassbay05.jpg" class="popupimage" /> ',
+                'marker-color': '#339966',
+                'marker-size': 'large',
+                'marker-symbol': 'wetland',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [148.331, -42.159]
+            }
+        },
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Pacific Barrier Reef',
+                description: 'So Friggin Pretty! <br /> <br /><img src="https://westcoastconnection.files.wordpress.com/2010/01/nemo2.jpg" class="popupimage" /> ',
+                'marker-color': '#ff1f50',
+                'marker-size': 'large',
+                'marker-symbol': 'park',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [145.81716200000005, -16.4475358]
+            }
+        },
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Finland',
+                description: 'Where Santa really lives <br /> <br /><img src="http://nordictravel.com.au/image/type/galleryFullImage/id/4643/filename/c.+Jiang+Ping+Visit+Finland+72464_000_04.jpg" class="popupimage" /> ',
+                'marker-color': '#ffeeee',
+                'marker-size': 'large',
+                'marker-symbol': 'skiing',
+            },
+            geometry: {
+                type: 'Point',
+                coordinates: [25.748151000000007, 61.92410999999999]
+            }
+        },
+
+        {
+            type: 'Feature',
+            properties: {
+                title: 'Rabat, Morocco',
+                description: 'cool <br /> <br /><img src="http://cheapvacationholiday.com/wp-content/uploads/2015/04/Morocco_h%C4%B1story_9.jpg" class="popupimage" />',
+                'marker-color': '#FF9933',
+                'marker-size': 'large',
+                'marker-symbol': 'zoo',
+            },
+            geometry:{
+                type: 'Point',
+                coordinates: [-6.849812899999961, 33.9715904]
+            }
+        },
+  {
+        type: 'Feature',
+        properties: {
+            title: 'Wineglass Bay, Tasmania, Australia',
+            description: 'the DOPEST aussie beach<br /> <br /><img src="http://www.enjoyourholiday.com/wp-content/uploads/2011/11/FLwineglassbay05.jpg" class="popupimage" /> ',
+            'marker-color': '#339966',
+            'marker-size': 'large',
+            'marker-symbol': 'wetland',
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [148.331, -42.159]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Interlaken, Switzerland',
+            description: 'woahhhhh so pretty <br /> <br /><img src="http://www.neverstoptraveling.com/wp-content/uploads/2012/01/Interlaken-ST.jpg" class="popupimage" /> ',
+            'marker-color': '#6666FF',
+            'marker-size': 'large',
+            'marker-symbol': 'park',
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [7.870, 46.687]
+        }
+    },
+       {
+        type: 'Feature',
+        properties: {
+            title: 'Barcelona, Barcelona, Spain',
+            description: 'C\'mon you know you wanted to come here after you saw Cheeta Girls 2 (; <br /> <br /><img src="http://www.mrwallpaper.com/wallpapers/barcelona-spain-2560x1440.jpg" class="popupimage" /> ',
+            'marker-color': '#FF6633',
+            'marker-size': 'large',
+            'marker-symbol': 'art-gallery',
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [2.173, 41.385]
+        }
+    },
+    {
+        type: 'Feature',
+        properties: {
+            title: 'Waimea Canyon Drive, Waimea, HI',
+            description: 'C\'mon you know you wanted to come here after you saw Cheeta Girls 2 (; <br /> <br /><img src="" class="popupimage" /> ',
+            'marker-color': '#FF6633',
+            'marker-size': 'large',
+            'marker-symbol': 'triangle',
+        },
+        geometry: {
+            type: 'Point',
+            coordinates: [-159.67, 21.992]
+        }
+    },
+    ]
+};
+
+myLayer.setGeoJSON(geojson); // Adds all of the markers to the map
+myLayer2.setGeoJSON(geojson);
+
+var zl = document.getElementById('zoomlens');
+
+// Call update or zoom functions when
+// these events occur.
+map.on('mousemove', update);
+map.on('zoomend', zoom);
+
+function zoom(e) {
+    if (zoommap._loaded) zoommap.setZoom(e.target.getZoom() + 1);
+}
+
+function update(e) {
+    zl.style.top = ~~e.containerPoint.y - 100 + 'px';
+    zl.style.left = ~~e.containerPoint.x - 100 + 'px';
+    zoommap.setView(e.latlng, map.getZoom() + 2, true);
+}
+map.on('ready', function() {
+    //featureLayer.getBounds() returns the corners of the furthest-out markers,
+    // and map.fitBounds() makes sure that the map contains these.
+   map.fitBounds(myLayer.getBounds());
+});
+
+</script>
+
+<div id='container'>
+
+    <h1>PLACES WORTH THE TRAVEL </h1>
+    
+    <div id='map'></div>
+</div>
+
+
+</body>
+</html>
