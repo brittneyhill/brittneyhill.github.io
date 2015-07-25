@@ -1,346 +1,168 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset=utf-8 />
-<title>Girls Who Code's Favorite Cities</title>
-<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-<style>
-	h1 {
-		color: #680000 ;
-		text-align: center;
-		font: italic bold 50px Papyrus, fantasy, sans-serif;
-		position: static;
+	<head>
+		<!--comment like this-->
+		<title>Brittney Hill</title>
+		<style>
+		@font-face { font-family: secave; src: url('SecondAvenue.ttf'); } 
+		@font-face { font-family: coco; src: url('CODE Bold.otf'); } 
+		@font-face { font-family: mona; src: url('Mona Shark.otf'); } 
+		@font-face { font-family: punk; src: url('LemonMilk.otf'); } 
+		@font-face { font-family: glass; src: url('glassbeads.ttf'); } 
+			.title {
+			
+				border-color: #CCFFFF;
+				border: 5px ;
+				padding: 20px;
+				margin-left: 10px;
+				margin-right: 10px;
+				color: white;
+				font-family: Times;
+			
+			}
+			.link {
+				
+				padding: -40px;
+				color: white;
+				font-family: punk;
+				text-decoration:none;
+				text-align: center;
+			}
+			body {
+				
+				background-color: rgb(0,0,0);
+				background-opacity: 0.8;
+			}
+			
+			h1 {
+				position: fixed;
+				width: 900px;
+    			color: #000000;
+				left: 57.5%;
+				top: -30px;
+				margin-left: -300px;
+				font-family: secave;
+				font-size: 1000%;
+				
+			
+			}
+			p {
+				position: relative;
+				color: white;
+				text-align: center;
+				font-family: coco;
+				top: 27em;
+				width:500px;
+				left: 410px;
+				
+				
+			}
+			#border { 
+				position: fixed;
+				width:2000px;
+				top: -10px;
+				height:300px;
+				margin-left:-1400px;
+			}
+			#me {
+				position: fixed;
+				top: 50%;
+    			left: 50%;
+    			margin-top: -150px;
+   				margin-left: -100px;
+				border-radius: 20px;
+				width: 200px;
+    			height: 200px;
+    			box-shadow: 0px 0px 20px;
+    			border-radius: 150px;
+			}
+			
+   			 div1 {
+   			 	position: fixed;
+   			 	border: outset 10px #660099;
+				bottom: 150px;
+				left:100px;
+    			width: 150px;
+    			height: 50px;
+    			background-color: #CC33FF;
+    			-webkit-animation-name: example; /* Chrome, Safari, Opera */
+    			-webkit-animation-duration: 8s; /* Chrome, Safari, Opera */
+    			text-align: center;
+    			-webkit-animation-iteration-count: infinite;
+    			-webkit-animation-direction: alternate;
+			}
+				 div2 {
+   			 	position: fixed;
+   			 	border: outset 10px #660099;
+				bottom: 150px;
+				right:100px;
+    			width: 150px;
+    			height: 50px;
+    			background-color: #CC33FF;
+    			-webkit-animation-name: example2; /* Chrome, Safari, Opera */
+    			-webkit-animation-duration: 8s; /* Chrome, Safari, Opera */
+    			text-align: center;
+    			-webkit-animation-iteration-count: infinite;
+    			-webkit-animation-direction: alternate;
+			}
+			ab {
+			text-align: center;
+			font-family: mona;
+			}
+					/* Chrome, Safari, Opera */
+		@-webkit-keyframes example {
+    		0% {background-color: #00FFFF;}
+    		20% {background-color: 	#9900FF;}
+    		40% {background-color: #FF0066;}
+    		60% {background-color: #3366CC;}
+    		80% {background-color: #FF0000;}
+    		100% {background-color: #9933CC;}
 		}
+@-webkit-keyframes example2 {
+    		0% {background-color: #9933CC;}
+    		20% {background-color: #3366CC;}
+    		40% {background-color: #00FFFF;}
+    		60% {background-color: #33FF66;}
+    		80% {background-color: #9900FF;}
+    		100% {background-color: #FF0066;}
+		}
+
+			a {
+				margin: 300px 10px 10px 10px;
+				
+			}
+			img {
+				box-shadow: 0px 0px 10px #222222;
+				border-radius: 3px;
+			}
+		</style>
+		<marquee> </marquee>
+		<img id ="border" src="https://cloud.githubusercontent.com/assets/13383812/8891839/e9087d84-32ed-11e5-935c-4bbea313fb1d.jpg">
 		
-	h2 {
-		color: #680250 ;
-		text-align: center;
-		font: italic bold 50px Papyrus, fantasy, sans-serif;
-		position: static;
-		}
-  body { margin:0; padding:0; }
-  #container { position:relative; margin: 0px auto; width: 80%;}
-  #map { position:relative; height: 500px; width:100%; }
-  .popupimage { width: 200px; }
-</style>
-</head>
-<body>
-<style>
-#map {
-  pointer-events:all;
-  cursor:none
-  }
-#zoommap {
-  background:#73b5e5;
-  width:200px;
-  height:200px;
-  overflow:hidden;
-  -webkit-transform:rotate(-60deg);
-     -moz-transform:rotate(-60deg);
-      -ms-transform:rotate(-60deg);
-       -o-transform:rotate(-60deg);
-          transform:rotate(-60deg);
-  }
-#zoomlens {
-  overflow:visible;
-  top:-9999px;
-  left:-9999px;
-  }
-#border {
-  border:5px solid #66FFFF;
-  border-radius:50%;
-  box-shadow:0 0 10px rgba(0,0,0,0.25);
-  }
-.overlay {
-  position:absolute;
-  pointer-events:none;
-  overflow:hidden;
-  width:200px;
-  height:200px;
-  z-index:1000;
-  }
-.rotater {
-  -webkit-transform:rotate(30deg);
-     -moz-transform:rotate(30deg);
-      -ms-transform:rotate(30deg);
-       -o-transform:rotate(30deg);
-          transform:rotate(30deg);
-  }
-</style>
-<div id='map'></div>
-<div id='zoomlens' class='overlay'>
-    <div class='overlay rotater'>
-        <div class='overlay rotater'>
-            <div id='zoommap' class='overlay'></div>
-        </div>
-    </div>
-    <div id='border' class='overlay'></div>
-</div>
-<script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiamVmZnN0ZXJuIiwiYSI6IlAzRFFiN0EifQ.mNWvayrLEw9wULuq0sopyA';
-var map = L.mapbox.map('map', 'mapbox.satellite');
-var zoommap = L.mapbox.map('zoommap', 'mapbox.dark', {
-    fadeAnimation: false,
-    zoomControl: false,
-    attributionControl: false
-});
-var myLayer = L.mapbox.featureLayer().addTo(map);
-var myLayer2 = L.mapbox.featureLayer().addTo(zoommap);
-//ballon marker data
+	
+			
+		<h1><i>Brittney Hill</i></h1>
+	</head>
+	
+		<div1></div1>	
+		
+	<body>
 
-var geojson = {
-    type: 'FeatureCollection',
-
-
-    // This is an array of Map Point objects
-    features: [
-     {
-            type: 'Feature',
-            properties: {
-                title: 'Socotra, Yemen',
-                description: 'Alien world!!',
-                'marker-color': '#000000',
-                'marker-size': 'large',
-                'marker-symbol': 'marker',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [53.82, 12.46]
-            }
-        },
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Madagscar',
-                description: 'King Julian! <br /> <br /><img src="https://gabrielksmith.files.wordpress.com/2013/08/king-julien-whoareyou.jpg" class= "popupimage"/> ',
-                'marker-color': '#ee9e50',
-                'marker-size': 'large',
-                'marker-symbol': 'park2',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [46.869106999999985, -18.766947]
-            }
-        },
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Reykjavik, Iceland',
-                description: 'volcanoes',
-                'marker-color': '#99ccff',
-                'marker-size': 'large',
-                'marker-symbol': 'water',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [-21.933332999999948, 64.133333]
-            }
-        },
-
-        {
-         type: 'Feature',
-            properties: {
-                title: 'Athens, Greece',
-                description: 'Sisterhood of the traveler pants..??? :) <br /> <br /><img src="http://athenscypria.com/images/articles/1_g_79885.jpg" class="popupimage" /> ',
-                'marker-color': '#00FFFF',
-                'maker-size': 'large',
-                'marker-symbol': 'swimming',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [23.72936,  37.983917] 
-            }
-        },
-
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Mount Jiuhua, China',
-                description: 'mountains...',
-                'marker-color': '#99ccff',
-                'marker-size': 'large',
-                'marker-symbol': 'triangle',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [118.45870500000001, 31.670336]
-            }
-        },
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Machu Picchu, Peru',
-                description: 'Lets hike! <br /> <br /><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Machu_Picchu_early_morning.JPG" class="popupimage" />',
-                'marker-color': '#00CC00',
-                'marker-size': 'large',
-                'marker-symbol': 'pitch',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [-72.544963, -13.163141]
-            }
-        },
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Wineglass Bay, Tasmania, Australia',
-                description: 'the DOPEST aussie beach<br /> <br /><img src="http://www.enjoyourholiday.com/wp-content/uploads/2011/11/FLwineglassbay05.jpg" class="popupimage" /> ',
-                'marker-color': '#339966',
-                'marker-size': 'large',
-                'marker-symbol': 'wetland',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [148.331, -42.159]
-            }
-        },
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Pacific Barrier Reef',
-                description: 'So Friggin Pretty! <br /> <br /><img src="https://westcoastconnection.files.wordpress.com/2010/01/nemo2.jpg" class="popupimage" /> ',
-                'marker-color': '#ff1f50',
-                'marker-size': 'large',
-                'marker-symbol': 'park',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [145.81716200000005, -16.4475358]
-            }
-        },
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Finland',
-                description: 'Where Santa really lives <br /> <br /><img src="http://nordictravel.com.au/image/type/galleryFullImage/id/4643/filename/c.+Jiang+Ping+Visit+Finland+72464_000_04.jpg" class="popupimage" /> ',
-                'marker-color': '#ffeeee',
-                'marker-size': 'large',
-                'marker-symbol': 'skiing',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [25.748151000000007, 61.92410999999999]
-            }
-        },
-
-        {
-            type: 'Feature',
-            properties: {
-                title: 'Rabat, Morocco',
-                description: 'cool <br /> <br /><img src="http://cheapvacationholiday.com/wp-content/uploads/2015/04/Morocco_h%C4%B1story_9.jpg" class="popupimage" />',
-                'marker-color': '#FF9933',
-                'marker-size': 'large',
-                'marker-symbol': 'zoo',
-            },
-            geometry:{
-                type: 'Point',
-                coordinates: [-6.849812899999961, 33.9715904]
-            }
-        },
-  {
-        type: 'Feature',
-        properties: {
-            title: 'Wineglass Bay, Tasmania, Australia',
-            description: 'the DOPEST aussie beach<br /> <br /><img src="http://www.enjoyourholiday.com/wp-content/uploads/2011/11/FLwineglassbay05.jpg" class="popupimage" /> ',
-            'marker-color': '#339966',
-            'marker-size': 'large',
-            'marker-symbol': 'wetland',
-        },
-        geometry: {
-            type: 'Point',
-            coordinates: [148.331, -42.159]
-        }
-    },
-    {
-        type: 'Feature',
-        properties: {
-            title: 'Interlaken, Switzerland',
-            description: 'woahhhhh so pretty <br /> <br /><img src="http://www.neverstoptraveling.com/wp-content/uploads/2012/01/Interlaken-ST.jpg" class="popupimage" /> ',
-            'marker-color': '#6666FF',
-            'marker-size': 'large',
-            'marker-symbol': 'park',
-        },
-        geometry: {
-            type: 'Point',
-            coordinates: [7.870, 46.687]
-        }
-    },
-       {
-        type: 'Feature',
-        properties: {
-            title: 'Barcelona, Barcelona, Spain',
-            description: 'C\'mon you know you wanted to come here after you saw Cheeta Girls 2 (; <br /> <br /><img src="http://www.mrwallpaper.com/wallpapers/barcelona-spain-2560x1440.jpg" class="popupimage" /> ',
-            'marker-color': '#FF6633',
-            'marker-size': 'large',
-            'marker-symbol': 'art-gallery',
-        },
-        geometry: {
-            type: 'Point',
-            coordinates: [2.173, 41.385]
-        }
-    },
-    {
-        type: 'Feature',
-        properties: {
-            title: 'Waimea Canyon Drive, Waimea, HI',
-            description: 'Alohaaaaa owiiiiiiiii <br /> <br /><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Waimea_Canyon_mar_2010.jpg" class="popupimage" /> ',
-            'marker-color': '#FF6633',
-            'marker-size': 'large',
-            'marker-symbol': 'triangle',
-        },
-        geometry: {
-            type: 'Point',
-            coordinates: [-159.67, 21.992]
-        }
-    },
-    ]
-};
-
-myLayer.setGeoJSON(geojson); // Adds all of the markers to the map
-myLayer2.setGeoJSON(geojson);
-
-var zl = document.getElementById('zoomlens');
-
-// Call update or zoom functions when
-// these events occur.
-map.on('mousemove', update);
-map.on('zoomend', zoom);
-
-function zoom(e) {
-    if (zoommap._loaded) zoommap.setZoom(e.target.getZoom() + 1);
-}
-
-function update(e) {
-    zl.style.top = ~~e.containerPoint.y - 100 + 'px';
-    zl.style.left = ~~e.containerPoint.x - 100 + 'px';
-    zoommap.setView(e.latlng, map.getZoom() + 2, true);
-}
-map.on('ready', function() {
-    //featureLayer.getBounds() returns the corners of the furthest-out markers,
-    // and map.fitBounds() makes sure that the map contains these.
-   map.fitBounds(myLayer.getBounds());
-});
-
-</script>
-
-<div id='container'>
-
-    <h1> if you want to add a place <a href=https://docs.google.com/forms/d/12ZoQG4BPEZBtSApVvPRC19eqAGOOJxMYl8G4a7gzuhM/viewform>here.</a></h1>
-   <p>hello</p>
-    <div id='map'></div>
-</div>
-
-
-</body>
+	
+		<p>Fruitcake lollipop jujubes tart. Macaroon jelly dessert muffin. Cotton candy ice cream caramels lemon drops. Brownie pudding apple pie soufflé cake chupa chups soufflé halvah bonbon. Croissant jelly tootsie roll biscuit candy canes chupa chups jelly beans cheesecake. Soufflé topping jelly beans lemon drops icing chocolate bar toffee jelly-o gummi bears. Dragée powder gingerbread brownie jelly cake lollipop ice cream chupa chups. Bear claw dessert marshmallow sweet roll soufflé tiramisu tart sugar plum tiramisu. Brownie icing powder topping donut. Pastry candy macaroon candy canes cupcake apple pie gingerbread. Oat cake cheesecake tootsie roll gummi bears gummies powder. Sesame snaps tiramisu liquorice lemon drops tootsie roll fruitcake wafer lemon drops. Chocolate cake macaroon sugar plum jelly-o candy.
+Macaroon fruitcake wafer oat cake cotton candy tootsie roll toffee. Sesame snaps lemon drops sweet muffin lemon drops icing apple pie sugar plum. Lemon drops biscuit candy oat cake fruitcake cake. Cotton candy cheesecake croissant muffin gummi bears candy canes pie danish carrot cake. Tootsie roll chocolate sesame snaps bear claw. Sugar plum chocolate cake donut chupa chups sugar plum gingerbread tiramisu. Pastry chocolate apple pie apple pie caramels. Candy canes croissant dragée dragée gummies. Pastry chupa chups caramels. Biscuit gummi bears gummi bears muffin tart cake dessert apple pie. Chocolate sweet caramels macaroon chocolate. Brownie danish cookie donut brownie tiramisu tart bonbon. Donut cupcake biscuit marzipan.</p>
+			<img id ="me" src="https://cloud.githubusercontent.com/assets/13383812/8891838/e905ffdc-32ed-11e5-92d4-ae997da2b1cb.jpg">
+	<div1> 
+	
+<a class="link" href="about.html"><font size= "5"> ABOUT ME </font></a> 
+</div1>
+<div2> 
+	
+<a class="link" href="LINKS.html"><font size= "5"> LINKS </font></a> 
+</div2>
+		<!-- add an image from the folder 	<img src=""></img>	-->
+		
+		
+	</body>
 </html>
+
